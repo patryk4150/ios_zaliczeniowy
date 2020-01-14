@@ -20,7 +20,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var productsEntity: NSEntityDescription? = nil
         
-    let serverUrl: String = "https://26f7d810.ngrok.io" // @TODO: url https z ngrok
+    let serverUrl: String = "https://d28c471d.ngrok.io" // @TODO: url https z ngrok
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +67,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 } else if let object = json as? [Any] {
                     for element in object as! [Dictionary<String,AnyObject>] {
                         let id = element["id"] as! Int
-                        let descrip = element["descrip"] as! String
+                        let descrip = element["description"] as! String
                         let image = element["image"] as! String
-                        let location_lat = element["location_lat"] as! Double
-                        let location_long = element["location_long"] as! Double
+                        let location_lat = 50
+                        let location_long = 50
+
+                      //  let location_lat = element["location_lat"] as! Double
+                   //     let location_long = element["location_long"] as! Double
                         let product = element["product"] as! String
                         
                         let post = NSManagedObject(entity: self.productsEntity!, insertInto: self.managedObjectContext)

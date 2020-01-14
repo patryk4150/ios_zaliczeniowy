@@ -26,6 +26,7 @@ class DetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     // @TODO: tutaj załaduj obraz z url
                     self.image.image = UIImage(data: data!)
+                    self.image.sizeToFit()
                     
                 }
             }
@@ -36,13 +37,25 @@ class DetailViewController: UIViewController {
             }
   
             /* @TODO tutaj załaduj dane do mapy */
-            
+
                 let location = CLLocationCoordinate2DMake(detail.location_lat, detail.location_long)
                 let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
                 let region = MKCoordinateRegion(center: location, span: span)
-                    
-                self.map.setRegion(region, animated:true)
-
+            
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = location.latitude
+            annotation.coordinate.longitude = location.longitude
+            annotation.title = "Sklep"
+            annotation.subtitle = detail.product
+            
+            if let mapa = map{
+                mapa.setRegion(region, animated:true)
+                mapa.addAnnotation(annotation)
+            }
+            
+                
+    
             
         }
     }
